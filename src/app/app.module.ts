@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserCacheLocation, IPublicClientApplication, LogLevel, PublicClientApplication } from '@azure/msal-browser';
 
 import { MSAL_INSTANCE, MsalService } from '@azure/msal-angular';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { HttpClientModule,HttpClient } from '@angular/common/http';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -32,11 +34,11 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,OAuthModule.forRoot(),HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },{
     provide: MSAL_INSTANCE,
     useFactory: MSALInstanceFactory
-  },
+  },HttpClientModule,
 MsalService,],
   bootstrap: [AppComponent],
 })

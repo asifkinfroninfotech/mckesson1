@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,17 @@ export class HeaderPage implements OnInit {
 
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus:boolean=false;
-  constructor() { }
+  constructor(private msalservice:MsalService) { }
 
   ngOnInit() {
   }
   SideNavToggle(){
     this.menuStatus=!this.menuStatus;
     this.sideNavToggled.emit(this.menuStatus);
+  }
+
+  logout(){
+    this.msalservice.logout();
   }
 
 }
