@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonCol, IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
@@ -17,6 +17,8 @@ import { SidenavPageModule } from '../sidenav/sidenav.module';
     HomePageRoutingModule,
     HeaderPageModule,
     SidenavPageModule
+   
+    
   ],
   declarations: [HomePage]
 })

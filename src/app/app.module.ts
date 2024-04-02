@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonCol, IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserCacheLocation, IPublicClientApplication, LogLevel, PublicClientApplication } from '@azure/msal-browser';
 
-import { MSAL_INSTANCE, MsalService } from '@azure/msal-angular';
+import { MSAL_INSTANCE, MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -34,11 +35,11 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,OAuthModule.forRoot(),HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,OAuthModule.forRoot(),HttpClientModule,CommonModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },{
     provide: MSAL_INSTANCE,
     useFactory: MSALInstanceFactory
-  },HttpClientModule,
+  },HttpClientModule,MsalBroadcastService,
 MsalService,],
   bootstrap: [AppComponent],
 })
